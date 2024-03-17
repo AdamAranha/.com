@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5001
 const XLSX = require('xlsx')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -9,7 +9,6 @@ const mysql = require('mysql2')
 //////////////////////////////////////////////////////////////////////////
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        return cb(null, '../app/src/assets')
     },
     filename: function (req, file, cb) {
         return cb(null, `${Date.now()}_${file.originalname}`)
