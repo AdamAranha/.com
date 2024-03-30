@@ -6,6 +6,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const multer = require('multer')
 const mysql = require('mysql2')
+const budgetTracker = require('./routes/budgetTracker')
 //////////////////////////////////////////////////////////////////////////
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -25,6 +26,8 @@ const connection = mysql.createConnection({
     password: '3Ardiadcm',
     port: 3306
   });
+
+  app.use('/budgetTracker', budgetTracker)
 
   connection.connect((err) => {
     if(err) {
@@ -54,10 +57,9 @@ app.use(cors(
 
 
 app.post('/testPost', upload.single('file'), (req, res)=>{
-    const workbook = XLSX.read(req.file.buffer)
+    const workbook = XLSX.read(req.file.buffer, {cellText:false, cellDates:true})
     const worksheet = workbook.Sheets['Sheet1']
-    XLSX.utils.sheet_to
-    const extract = XLSX.utils.sheet_to_json(worksheet, {header: "A", raw: false, dateNF:'dd-mm-yyyy'})
+    const extract = XLSX.utils.sheet_to_json(worksheet, {header: "A", raw: false, dateNF:'yyyymmdd'})
     res.status(200).send(extract)
 })
 
