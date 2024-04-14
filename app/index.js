@@ -54,7 +54,9 @@ app.use(cors(
 ));
 
 // app.use(express.json())
-
+app.get('*', function(request, response) {
+    response.sendFile(__dirname + '../public_html/index.html');
+  });
 
 app.post('/testPost', upload.single('file'), (req, res)=>{
     const workbook = XLSX.read(req.file.buffer, {cellText:false, cellDates:true})

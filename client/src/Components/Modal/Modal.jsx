@@ -3,7 +3,7 @@ import './Modal.css'
 
 
 export default function Modal() {
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(true)
 
     const toggleModal = () => {
         setVisible(!visible)
@@ -21,7 +21,6 @@ export default function Modal() {
                 <div className="modal">
                 <div className="overlay"></div>
                 <div className="modal-content">
-
                 <button onClick={toggleModal}>Close</button>
                 </div>
             </div>

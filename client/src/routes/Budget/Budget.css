@@ -1,0 +1,18 @@
+
+.budget-body {
+    background-color: red;
+    height: 150vh;
+    width: 100%;
+
+    h1 {
+        margin: 0;
+    }
+}
+
+@media (min-width: 600px) {
+
+    .budget-body {
+        /* margin-left: 170px; */
+        /* height: 100vh; */
+    }
+}

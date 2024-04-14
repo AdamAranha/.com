@@ -4,12 +4,42 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom'
-import Homepage from './routes/Homepage.jsx'
+import Nav from './Components/Nav/Nav.jsx'
+import './main.css'
+import Add from './routes/Add/Add.jsx'
+import Accounts from './routes/Accounts/Accounts.jsx'
+import Budget from './routes/Budget/Budget.jsx'
+import Help from './routes/Help/Help.jsx'
+import Reports from './routes/Reports/Reports.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Homepage/>
+    element: <Nav/>,
+    children: [
+
+      {
+        path: '/add',
+        element: <Add/>
+      },
+      {
+        path: '/accounts',
+        element: <Accounts/>
+      },
+      {
+        path: '/budget',
+        element: <Budget/>
+      },
+      {
+        path: '/help',
+        element: <Help/>
+      },
+      {
+        path: '/reports',
+        element: <Reports/>
+      },
+
+    ]
   }
 ])
 

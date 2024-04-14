@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useState } from 'react'
-import Modal from '../Components/Modal/Modal.jsx'
 
 //application/vnd.openxmlformats-officedocument.spreadsheetml.sheet is used for excel files 2007 and after
 
@@ -16,23 +15,22 @@ export default function Homepage() {
                 const myFormData = new FormData();
                 myFormData.append('file', myFile)
 
-                    await axios({
-                        url: 'http://localhost:5001/testPost/',
-                        method: 'POST',
-                        data: myFormData,
-                        headers: {
-                            'Content-Type': 'mulipart/form-data'
-                        }
-                    })
-                    .then((response) => {
-                        console.table(response.data);
-                        setPlaceholder(response.data)
-                    }).catch(err=>console.log(err));
+                await axios({
+                    url: 'http://localhost:5001/testPost/',
+                    method: 'POST',
+                    data: myFormData,
+                    headers: {
+                        'Content-Type': 'mulipart/form-data'
+                    }
+                })
+                .then((response) => {
+                    console.table(response.data);
+                    setPlaceholder(response.data)
+                }).catch(err=>console.log(err));
 
                 }
             }/>
             <p>{JSON.stringify(placeholder)}</p>
-            <Modal/>
         </>
     )
 }
