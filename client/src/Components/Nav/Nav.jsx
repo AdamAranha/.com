@@ -3,13 +3,12 @@ import './Nav.css'
 import { useState } from 'react'
 
 import DoubleArrow from '../../assets/doubleArrow.svg?react'
-import MoneySVG from '../../assets/money.svg?react'
+import MoneySVG from  '../../assets/money.svg?react'
 import AccountsSVG from '../../assets/accounts.svg?react'
 import AddSVG from '../../assets/add.svg?react'
 import ReportsSVG from '../../assets/reports.svg?react'
 import HelpSVG from '../../assets/help.svg?react'
 import Profile from '../../assets/profile.svg?react'
-
 
 
 const navList = [
@@ -45,7 +44,7 @@ const navList = [
     },
 ]
 
-const ifMobile = () => window.innerWidth <= 600
+const isMobile = () => window.innerWidth <= 600
 
 export default function Nav() {
 
@@ -54,7 +53,7 @@ export default function Nav() {
     return (
         <div className='nav-wrapper'>
             <div className={`nav-content ${open ? 'nav-close' : ''}`}>
-                {ifMobile() ? '' : 
+                {isMobile() ? '' : 
                     <div className='nav-header'>
                         <Profile/>
                         <div className='nav-header-container'>
@@ -65,16 +64,28 @@ export default function Nav() {
                     }
                 <ul className='nav-list'>
 
+                    {/* All this to show appropriate icons in mobile, and hide them when not needed in desktop 
+                        If in mobile, show everything. But if not in mobile, only show those ok'd for desktop
+                    */}
                     {navList.map((item) => (
-                    <NavLink to={item.path}>
+                        isMobile() ?
+                        <NavLink to={item.path} key={item.name}>
                         <li className='nav-item'>
                             <div className='svg'>{item.icon}</div>
-                            {ifMobile() ? '' : <h5 className='nav-title'>{item.name}</h5>}
+                            {isMobile() ? '' : <h5 className='nav-title'>{item.name}</h5>}
                         </li>
-                    </NavLink>
+                        </NavLink> :
+                        item.inDesktop ? 
+                        <NavLink to={item.path} key={item.name}>
+                        <li className='nav-item'>
+                            <div className='svg'>{item.icon}</div>
+                            {isMobile() ? '' : <h5 className='nav-title'>{item.name}</h5>}
+                        </li>
+                        </NavLink> :
+                        ''
                     ))}
                 </ul>
-                {ifMobile() ? '' :
+                {isMobile() ? '' :
                 <div className='nav-collapse'>
                     <DoubleArrow onClick={() => {setOpen(!open)}}/>
                 </div>

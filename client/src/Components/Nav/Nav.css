@@ -1,6 +1,6 @@
 .nav-wrapper {
     .nav-content {
-        background-color: blue;
+        background-color: #011627;
         height: 80px;
         width: 100vw;
         position: fixed;
@@ -125,7 +125,6 @@
                         padding: 8px 10px;
                     }
 
-
                     .nav-title {
                         padding-left: 10px;   
                         margin: 5px 0; 
@@ -133,7 +132,11 @@
                 }
 
                 .nav-item:hover {
-                    background-color: red;
+                    /* background-color: #FF9F1C; */
+                    .nav-title {
+                       color: #FF9F1C;
+                    }
+                    svg { color: #FF9F1C;}
                 }
             }
 
@@ -141,6 +144,11 @@
                 position: absolute;
                 bottom: 20px;
                 right: 20px;
+
+                :hover {
+                    cursor: pointer;
+                    color: #FF9F1C;
+                }
             }
         }
 
@@ -151,8 +159,11 @@
                 .nav-item:hover {
                     background-color: transparent;
 
-                    .svg:hover {
+                    /* .svg:hover {
                         background-color: red;
+                    } */
+                    svg {
+                        color: #FF9F1C;
                     }
                 }
             }

@@ -1,3 +1,41 @@
 .accounts-body {
     background-color: blue;
+    display: flex;
+    flex-direction: column;
+
+    .accounts-header {
+        .accounts-header-title{
+            margin: 0;
+            padding: 20px;
+        }
+    }
+
+    .accounts-balance {
+        display: flex;
+        h2 {        
+            margin: 0;
+            padding: 0 10px 0 10px;
+        }
+        /* font-size: 16px; */
+    }
+
+    .accounts-balance * {
+        padding: 10px;
+    }
+
+    .accounts-items {
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+
+            th, td {
+                border: 1px solid black;
+                /* padding: 0; */
+            }
+            
+            .accounts-col {
+                .flag {order: 1;}
+            }
+        }
+    }
 }

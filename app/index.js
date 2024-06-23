@@ -1,69 +1,63 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 5001
-const XLSX = require('xlsx')
+const path = require('path')
+
 const cors = require('cors')
-const bodyParser = require('body-parser')
-const multer = require('multer')
+
 const mysql = require('mysql2')
-const budgetTracker = require('./routes/budgetTracker')
-//////////////////////////////////////////////////////////////////////////
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-    },
-    filename: function (req, file, cb) {
-        return cb(null, `${Date.now()}_${file.originalname}`)
-    }
-})
-const upload = multer(
-    // {storage}
-    )
-// create the connection to database
-const connection = mysql.createConnection({
+// const { Sequelize } = require('sequelize');
+app.use(cors())
+app.use(express.json())
+// app.use(express.urlencoded())
+app.use(express.static(path.join(__dirname, '../public_html')))
+
+
+const pool = mysql.createPool({
     host: '104.152.168.44',
     user: 'adamaran_powerUser',
     database: 'adamaran_testDb',
     password: '3Ardiadcm',
+    // gCmNL0W%y[bT
     port: 3306
-  });
-
-  app.use('/budgetTracker', budgetTracker)
-
-  connection.connect((err) => {
-    if(err) {
-        console.log(err)
-    }
-    console.log('MySql Connected!')
-  })
-
-  connection.execute(
-    'CREATE TABLE IF NOT EXISTS Users ( ID int NOT NULL AUTO_INCREMENT, Username VARCHAR(255), Password VARCHAR(255), PRIMARY KEY (ID))',
-    (err, results, fields) => {
-        // console.log(err)
-        console.log(results)
-        // console.log(fields)
-    }
-  )
-//////////////////////////////////////////////////////////////////////////
-// const workbook = XLSX.readFile('pcbanking.xlsx')
-app.use(cors(
-//     {
-//     credentials: true,
-//     origin: 'http://localhost:5173'
-// }
-));
-
-// app.use(express.json())
-app.get('*', function(request, response) {
-    response.sendFile(__dirname + '../public_html/index.html');
-  });
-
-app.post('/testPost', upload.single('file'), (req, res)=>{
-    const workbook = XLSX.read(req.file.buffer, {cellText:false, cellDates:true})
-    const worksheet = workbook.Sheets['Sheet1']
-    const extract = XLSX.utils.sheet_to_json(worksheet, {header: "A", raw: false, dateNF:'yyyymmdd'})
-    res.status(200).send(extract)
 })
+
+pool.getConnection((err, connection) => {
+    if(err instanceof Error) {
+        console.log(err)
+        return
+    }
+    connection.release()
+})
+
+app.get('/test', (req, res) => {
+    res.send({message: 'Registering New'})
+})
+
+app.get('/budgettracker/pull', (req, res) => {
+    pool.query('SELECT * FROM Users', (err, rows, fields) => {
+        if(err instanceof Error) {
+            console.log(err)
+            return
+        }
+        // console.log(rows)
+        // console.log(fields)
+        res.send(rows)
+    })
+})
+
+app.post('/budgettracker/push', (req, res) => {
+    // console.log(req.body)
+    const {username, password} = req.body
+    pool.query('INSERT INTO Users (Username, Password) VALUES (?, ?)', [username, password], (err, rows) => {
+        res.send(rows)
+    })
+})
+
+app.get('/*', (req, res) => {                       
+    res.sendFile(path.join(__dirname, '../public_html','index.html'));                               
+  });
+
 
 app.listen(PORT, () => {
     console.log(`Listening on port http://localhost:${PORT}`) 
