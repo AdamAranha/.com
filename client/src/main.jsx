@@ -1,47 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-import './main.css'
+import {createBrowserRouter, RouterProvider, Outlet,} from 'react-router-dom'
 
 import Nav from './Components/Nav/Nav.jsx'
-import Add from './routes/Add/Add.jsx'
-import Accounts from './routes/Accounts/Accounts.jsx'
-import Budget from './routes/Budget/Budget.jsx'
-import Help from './routes/Help/Help.jsx'
-import Reports from './routes/Reports/Reports.jsx'
+import Account from './Routes/BudgetTracker/Account/Account.jsx'
 
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Nav/>,
-    children: [
-
-      {
-        path: '/add',
-        element: <Add/>
-      },
-      {
-        path: '/accounts',
-        element: <Accounts/>
-      },
-      {
-        path: '/budget',
-        element: <Budget/>
-      },
-      {
-        path: '/help',
-        element: <Help/>
-      },
-      {
-        path: '/reports',
-        element: <Reports/>
-      },
-
-    ]
-  }
-])
-
+const router = createBrowserRouter([{
+  path: '/',
+  element: <Nav/>,
+  children: [
+    {
+      path: 'budgetTracker',
+      // element: <><Outlet/></>,
+      children: [
+        {
+          path: 'account',
+          element: <Account/>,
+        }
+      ]
+    }
+  ]
+}])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

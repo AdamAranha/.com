@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33">
-  <rect x=".5" y=".5" width="32" height="32" rx="2.96" ry="2.96" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
-  <rect x="2.5" y="2.5" width="28" height="28" fill="#fff" stroke="#231f20" stroke-miterlimit="10" stroke-width="3"/>
-  <line x1="16.5" y1="7.5" x2="16.5" y2="25.5" fill="#fff" stroke="#231f20" stroke-miterlimit="10" stroke-width="4"/>
-  <line x1="25.5" y1="16.5" x2="7.5" y2="16.5" fill="#fff" stroke="#231f20" stroke-miterlimit="10" stroke-width="4"/>
-</svg>

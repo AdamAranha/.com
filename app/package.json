@@ -1,32 +1,30 @@
 {
   "name": "adamaranha.com",
   "version": "1.0.0",
-  "description": "",
+  "description": "Homepage for Adam Aranha",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AdamAranha/.com.git#main"
+    "url": "git+https://github.com/AdamAranha/.com.git"
   },
   "author": "ME",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AdamAranha/.com/issues"
   },
-  "homepage": "https://github.com/AdamAranha/.com/tree/main#readme",
+  "homepage": "https://github.com/AdamAranha/.com#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.9.7",
-    "sequelize": "^6.37.3",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.4"
   }
 }
